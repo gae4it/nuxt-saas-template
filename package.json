@@ -7,28 +7,46 @@
     "dev": "nuxt dev",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "typecheck": "nuxt typecheck"
+    "prepare": "husky install",
+    "lint": "eslint . --cache --cache-location .cache/eslint",
+    "check": "eslint . --cache --cache-location .cache/eslint && prettier --check .",
+    "fix": "eslint . --cache --fix --cache-location .cache/eslint && prettier --write .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.90",
-    "@iconify-json/simple-icons": "^1.2.70",
-    "@nuxt/content": "^3.11.2",
+    "@iconify-json/lucide": "^1.2.94",
+    "@iconify-json/simple-icons": "^1.2.71",
+    "@nuxt/content": "^3.12.0",
     "@nuxt/image": "^2.0.0",
-    "@nuxt/ui": "^4.4.0",
+    "@nuxt/ui": "^4.5.0",
     "@standard-schema/spec": "^1.1.0",
     "@vueuse/nuxt": "^14.2.1",
     "better-sqlite3": "^12.6.2",
     "nuxt": "^4.3.1",
     "nuxt-og-image": "^5.1.13",
-    "tailwindcss": "^4.1.18",
+    "tailwindcss": "^4.2.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.15.1",
-    "eslint": "^10.0.0",
+    "@nuxt/eslint": "^1.15.2",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^10.0.2",
+    "eslint-config-next": "^16.1.6",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-tailwindcss": "^3.18.2",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1",
     "typescript": "^5.9.3",
-    "vue-tsc": "^3.2.4"
+    "vue-tsc": "^3.2.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --cache --fix"
+    ],
+    "*": [
+      "prettier --write --ignore-unknown"
+    ]
   },
   "packageManager": "pnpm@10.29.3"
 }
