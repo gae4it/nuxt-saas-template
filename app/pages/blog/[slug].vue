@@ -1,9 +1,15 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const { data: post } = await useAsyncData(route.path, () => queryCollection('posts').path(route.path).first())
+const { data: post } = await useAsyncData(route.path, () =>
+  queryCollection('posts').path(route.path).first()
+)
 if (!post.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Post not found', fatal: true })
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Post not found',
+    fatal: true
+  })
 }
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
@@ -35,17 +41,17 @@ if (post.value.image?.src) {
 
 <template>
   <UContainer v-if="post">
-    <UPageHeader
-      :title="post.title"
-      :description="post.description"
-    >
+    <UPageHeader :title="post.title" :description="post.description">
       <template #headline>
-        <UBadge
-          v-bind="post.badge"
-          variant="subtle"
-        />
+        <UBadge v-bind="post.badge" variant="subtle" />
         <span class="text-muted">&middot;</span>
-        <time class="text-muted">{{ new Date(post.date).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' }) }}</time>
+        <time class="text-muted">{{
+          new Date(post.date).toLocaleDateString('en', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          })
+        }}</time>
       </template>
 
       <div class="flex flex-wrap items-center gap-3 mt-4">
@@ -58,11 +64,7 @@ if (post.value.image?.src) {
           target="_blank"
           size="sm"
         >
-          <UAvatar
-            v-bind="author.avatar"
-            alt="Author avatar"
-            size="2xs"
-          />
+          <UAvatar v-bind="author.avatar" alt="Author avatar" size="2xs" />
 
           {{ author.name }}
         </UButton>
@@ -71,20 +73,14 @@ if (post.value.image?.src) {
 
     <UPage>
       <UPageBody>
-        <ContentRenderer
-          v-if="post"
-          :value="post"
-        />
+        <ContentRenderer v-if="post" :value="post" />
 
         <USeparator v-if="surround?.length" />
 
         <UContentSurround :surround="surround" />
       </UPageBody>
 
-      <template
-        v-if="post?.body?.toc?.links?.length"
-        #right
-      >
+      <template v-if="post?.body?.toc?.links?.length" #right>
         <UContentToc :links="post.body.toc.links" />
       </template>
     </UPage>

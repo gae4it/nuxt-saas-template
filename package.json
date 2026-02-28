@@ -10,8 +10,8 @@
     "prepare": "husky install",
     "lint": "eslint . --cache --cache-location .cache/eslint",
     "check": "eslint . --cache --cache-location .cache/eslint && prettier --check .",
-    "fix": "eslint . --cache --fix --cache-location .cache/eslint && prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "fix": "eslint . --fix --cache --cache-location .cache/eslint && prettier --write .",
+    "typecheck": "npx nuxi typecheck"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.94",
@@ -29,20 +29,23 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.15.2",
+    "@stylistic/eslint-plugin": "^5.9.0",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^10.0.2",
     "eslint-config-next": "^16.1.6",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-tailwindcss": "^3.18.2",
+    "eslint-plugin-vue": "^10.8.0",
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3",
+    "vue-eslint-parser": "^10.4.0",
     "vue-tsc": "^3.2.5"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --cache --fix"
+    "*.{js,ts,vue}": [
+      "eslint --fix"
     ],
     "*": [
       "prettier --write --ignore-unknown"

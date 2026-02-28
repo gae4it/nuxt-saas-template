@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { data: page } = await useAsyncData('index', () => queryCollection('index').first())
+const { data: page } = await useAsyncData('index', () =>
+  queryCollection('index').first()
+)
 
 const title = page.value?.seo?.title || page.value?.title
 const description = page.value?.seo?.description || page.value?.description
@@ -25,10 +27,7 @@ useSeoMeta({
       </template>
 
       <template #title>
-        <MDC
-          :value="page.title"
-          unwrap="p"
-        />
+        <MDC :value="page.title" unwrap="p" />
       </template>
 
       <PromotionalVideo />
@@ -72,13 +71,13 @@ useSeoMeta({
           :key="index"
           variant="subtle"
           :description="testimonial.quote"
-          :ui="{ description: 'before:content-[open-quote] after:content-[close-quote]' }"
+          :ui="{
+            description:
+              'before:content-[open-quote] after:content-[close-quote]'
+          }"
         >
           <template #footer>
-            <UUser
-              v-bind="testimonial.user"
-              size="lg"
-            />
+            <UUser v-bind="testimonial.user" size="lg" />
           </template>
         </UPageCard>
       </UPageColumns>
@@ -86,11 +85,7 @@ useSeoMeta({
 
     <USeparator />
 
-    <UPageCTA
-      v-bind="page.cta"
-      variant="naked"
-      class="overflow-hidden"
-    >
+    <UPageCTA v-bind="page.cta" variant="naked" class="overflow-hidden">
       <LazyStarsBg />
     </UPageCTA>
   </div>
